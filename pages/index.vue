@@ -315,7 +315,7 @@ export default {
           this.filters.push(filter)
         }
       }
-      localStorage.setItem('filters', JSON.stringify(this.filters));
+      // localStorage.setItem('filters', JSON.stringify(this.filters));
     },
     UpdateFilteredNotes(all) {
       this.filterdNote = []
@@ -327,8 +327,8 @@ export default {
         }
       }
       this.DisplayNote(window.innerWidth)
-      localStorage.setItem('filters', JSON.stringify(this.filters));
-      localStorage.setItem('notes', JSON.stringify(this.notes));
+      // localStorage.setItem('filters', JSON.stringify(this.filters));
+      // localStorage.setItem('notes', JSON.stringify(this.notes));
     },
     async GetNotes() {
       const supabase = useSupabaseClient()
@@ -387,12 +387,12 @@ export default {
     },
   },
   mounted() {
-    if (localStorage.filters) {
-        this.filters = JSON.parse(localStorage.filters);
-    }
-    if (localStorage.notes) {
-        this.notes = JSON.parse(localStorage.notes);
-    }
+    // if (localStorage.filters) {
+    //     this.filters = JSON.parse(localStorage.filters);
+    // }
+    // if (localStorage.notes) {
+    //     this.notes = JSON.parse(localStorage.notes);
+    // }
     this.GetAllColors().then(response => {
       this.allColors = response;
     })
