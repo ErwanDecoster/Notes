@@ -40,7 +40,7 @@
           </div>
         </form>
         <div class="grid gap-2">
-          <button form="form" type="submit" class="text-xl bg-neutral-800 text-white rounded-full py-1 px-2 text-center cursor-pointer">S’inscrire</button>
+          <button form="form" type="submit" class="text-xl bg-neutral-800 text-white rounded-full py-1 px-2 text-center cursor-pointer">S'inscrire</button>
           <NuxtLink to="/login" class="text-xl rounded-full py-1 px-2 text-center cursor-pointer">Connection</NuxtLink>
         </div>
       </div>
