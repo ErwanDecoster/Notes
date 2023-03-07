@@ -3,11 +3,10 @@
     <Navbar />
     <div class="max-w-screen-xl w-full m-auto p-4 grid gap-8 mt-12">
       <h1 class="text-5xl font-semibold w-full text-center">Notes - Paramètre</h1>
-      <div class="grid m-auto gap-8">
-        <div class="bg-red-400 py-1 px-2 text-xl rounded-3xl">Rien ne fonctionne c'est juste une jolie page</div>
-        <div class="grid grid-cols-2 gap-8 ">
-          <h2 class="col-span-2 text-3xl font-semibold">Modification du compte</h2>
-          <form class="flex flex-col gap-4 w-80">
+      <div class="grid m-auto gap-8 pb-16">
+        <!-- <div class="grid sm:grid-cols-2 justify-center gap-8">
+          <h2 class="sm:col-span-2 text-3xl font-semibold">Modification du compte</h2>
+          <form class="flex flex-col gap-4 w-80" @submit.prevent="ChangeEmail()">
             <h3 class="text-xl font-semibold">Changement d'email</h3>
             <div class="grid">
               <label class="text-xl" for="email">Email actuel</label>
@@ -62,12 +61,12 @@
             </div>
             <button type="submit" class="text-xl bg-neutral-800 text-white rounded-full py-1 px-2 text-center cursor-pointer">Sauvegarder</button>
           </form>
-        </div>
+        </div> -->
         <div class="flex flex-col gap-4">
           <h2 class="text-3xl font-semibold">Déconnexion et suppression</h2>
-          <div class="flex flex-wrap gap-4">
-            <button type="submit" class="text-xl bg-red-400 rounded-full py-1 px-2 text-center cursor-pointer w-72 ">Se deconnecter</button>
-            <button type="submit" class="text-xl bg-red-400 rounded-full py-1 px-2 text-center cursor-pointer w-72 ">Supprimer le compte</button>
+          <div class="grid sm:grid-cols-2 justify-center gap-4">
+            <button @click="LogOut()" class="text-xl bg-red-400 rounded-full py-1 px-2 text-center cursor-pointer w-72 ">Se deconnecter</button>
+            <!-- <button @click="RemoveUser()" class="text-xl bg-red-400 rounded-full py-1 px-2 text-center cursor-pointer w-72 ">Supprimer le compte</button> -->
           </div>
         </div>
       </div>
@@ -111,6 +110,17 @@ export default {
     VerifEmail(email) {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
+    },
+    async LogOut() {
+      const supabase = useSupabaseClient()
+      let { error } = await supabase.auth.signOut()
+    },
+    async RemoveUser() {
+      const actuelUser = useSupabaseUser();
+      const supabase = useSupabaseClient();
+      const { data: user, error } = await supabase.auth.api.deleteUser(
+        actuelUser.id
+      )
     },
   }
 };
